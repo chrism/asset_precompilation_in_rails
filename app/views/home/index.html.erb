@@ -1,2 +1,51 @@
-<h1>Home#index</h1>
-<p>Find me in app/views/home/index.html.erb</p>
+<h1>Asset pipeline precompilation in Rails 4</h1>
+
+<%= image_tag 'test-image.png', class: "retina-too" %>
+
+<div class="intro">
+  <p>This is a simple example project to demonstrate how to ensure your assets are precompiling correctly before deploying to Heroku.</p>
+
+  <p>Images in CSS files can be particularly tricky, so two techniques are covered here.</p>
+
+  <p>The grey outlined boxed to the left is a test image of a purple circle that should display in all of the boxes below</p>
+</div>
+
+<div class="examples">
+  <div class="sass">
+    <h3>Option 1, using image-url in the SCSS file test-scss.css.scss</h3>
+    <pre>background: image-url('test-image.png');</pre>
+    <div class="sass-example"></div>
+  </div>
+
+  <div class="erb">
+    <h3>Option 2, using asset_path in the SCSS file test-erb.css.scss.erb</h3>
+    <pre>background: url(<%%= asset_path 'image-test.png' %>);</pre>
+    <div class="sass-example"></div>
+  </div>
+</div>
+
+<h2>In development</h2>
+
+<p>Running <pre>rails s</pre> from the command line should display purple circles in the boxes below</p>
+
+<h2>In production (after asset precompilation)</h2>
+
+<p>First make sure that <pre>config/production.rb</pre> is set up to serve static assets with</p>
+
+<pre>config.serve_static_assets = true</pre>
+
+<p>Then to emulate production mode first nuke assets (if you have already precompiled before)</p>
+
+<pre>RAILS_ENV=production rake assets:clobber</pre>
+
+<p>The precompile the assets</p>
+
+<pre>RAILS_ENV=production rake assets:precompile</pre>
+
+<p>now the assets should be available in public/assets so run the server in production</p>
+
+<pre>RAILS_ENV=production rails s</pre>
+
+<p>You should see that the images are still displaying, but now their filenames include a fingerprint.</p>
+
+<p>These precompiled assets can now be safely pushed to Heroku.</p>

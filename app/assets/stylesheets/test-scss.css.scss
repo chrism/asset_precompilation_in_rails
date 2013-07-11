@@ -1,0 +1,42 @@
+body {
+  padding: 20px;
+  font-family: sans-serif;
+  color: #444;
+  background-color: #ededed;
+}
+
+.intro {
+  overflow: hidden;
+
+  p:first-child {
+    margin-top: 0;
+  }
+}
+
+.sass, .erb {
+  float: left;
+  width: 50%;
+  display: block;
+
+}
+
+.examples {
+  overflow: auto;
+  margin-bottom: 20px;
+}
+.sass-example {
+  border: 1px solid #CCC;
+  display: block;
+  height: 100px;
+  width: 100px;
+  background: image-url('test-image.png');
+  background-size: contain;
+}
+
+.retina-too {
+  float: left;
+  margin-right: 20px;
+  border: 1px solid #CCC;
+  width: 100px;
+  height: 100px;
+}
